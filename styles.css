@@ -1,0 +1,39 @@
+.div-form {
+    margin: 30px auto;
+}
+
+
+
+
+/* MapQuest Place Search API */
+.mq-place-search {}
+
+.mq-input {}
+
+.mq-input::-webkit-search-decoration {}
+
+.mq-input::-webkit-search-cancel-button {}
+
+.mq-input::-ms-clear {}
+
+.mq-input-icon {}
+
+.mq-input-icon svg {}
+
+.mq-dropdown-menu {}
+
+.mq-result {}
+
+.mq-result .mq-name {}
+
+.mq-result .mq-address {}
+
+.mq-result-icon {}
+
+.mq-result-icon svg {}
+
+.mq-cursor {}
+
+.mq-cursor .mq-result-icon svg {}
+
+.mq-icon-clear {}

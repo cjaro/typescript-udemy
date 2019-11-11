@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css"/>
+    <title>Learning TypeScript</title>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="/typescript-logo.png" width="30" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Shop
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Magnets</a>
+                    <a class="dropdown-item" href="#">Stickers</a>
+                    <a class="dropdown-item" href="#">Mugs & Cups</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">More items →</a>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container div-form">
+    <form action="/" class="form">
+        <div class="form-group">
+            <label for="form-address">Address*</label>
+            <input type="search" class="form-control" id="form-address" placeholder="Where do you live?" />
+        </div>
+        <div class="form-group">
+            <label for="form-street">Street</label>
+            <input type="text" class="form-control" id="form-street" placeholder="Street number and name" />
+        </div>
+        <div class="form-group">
+            <label for="form-city">City*</label>
+            <input type="text" class="form-control" id="form-city" placeholder="City">
+        </div>
+        <div class="form-group">
+            <label for="form-state">State*</label>
+            <input type="text" class="form-control" id="form-state" placeholder="State">
+        </div>
+        <div class="form-group">
+            <label for="form-state-code">State Code*</label>
+            <input type="text" class="form-control" id="form-state-code" placeholder="State Code">
+        </div>
+        <div class="form-group">
+            <label for="form-zip">ZIP code*</label>
+            <input type="text" class="form-control" id="form-zip" placeholder="ZIP code">
+        </div>
+        <div class="form-group">
+            <label for="form-country">Country*</label>
+            <input type="text" class="form-control" id="form-country" placeholder="Country">
+        </div>
+        <div class="form-group">
+            <label for="form-country-code">Country Code*</label>
+            <input type="text" class="form-control" id="form-country-code" placeholder="Country Code">
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    window.onload = function() {
+        let ps = placeSearch({
+            key: 'yATw9YTrB2N0GoUmIXmKYgL66jXOnepR',
+            container: document.querySelector('#form-address'),
+            useDeviceLocation: true,
+            collection: [
+                'poi',
+                'airport',
+                'address',
+                'adminArea',
+            ]
+        });
+        console.log(ps.result);
+
+        ps.on('change', (e) => {
+            document.querySelector('#form-street').value = e.result.name || '';
+            document.querySelector('#form-city').value = e.result.city || '';
+            document.querySelector('#form-state').value = e.result.state || '';
+            document.querySelector('#form-state-code').value = e.result.stateCode || '';
+            document.querySelector('#form-zip').value = e.result.postalCode || '';
+            document.querySelector('#form-country').value = e.result.country || '';
+            document.querySelector('#form-country-code').value = e.result.countryCode || '';
+        });
+
+        ps.on('clear', () => {
+            document.querySelector('#form-street').value = '';
+            document.querySelector('#form-city').value = '';
+            document.querySelector('#form-state').value = '';
+            document.querySelector('#form-state-code').value = '';
+            document.querySelector('#form-zip').value = '';
+            document.querySelector('#form-country').value = '';
+            document.querySelector('#form-country-code').value = '';
+        });
+
+        ps.on('error', (e) => {
+            console.log(e);
+        });
+    }
+
+</script>
+
+</body>
+</html>
