@@ -60,3 +60,27 @@ var complex = {
         return this.data;
     }
 };
+var complex2 = {
+    data: [100, 3.00, 10],
+    output: function (all) {
+        return this.data;
+    }
+};
+// union types
+var myRealRealAge = 27;
+// myRealRealAge = "26";
+// check types
+var finalValue = 30;
+if (typeof finalValue == "number") {
+    console.log("Final value is a number");
+}
+// never
+function neverReturns() {
+    throw new Error('Oh no! An error!');
+}
+// non-nullable types
+var canBeNull = 12;
+canBeNull = null;
+var canAlsoBeNull;
+canAlsoBeNull = null;
+var canThisBeAny = null;

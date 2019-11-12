@@ -76,3 +76,35 @@ let complex: {data: number[], output: (all: boolean) => number[]} = {
         return this.data;
     }
 };
+
+// type alias
+type Complex = {data: number[], output: (all: boolean) => number[]};
+
+let complex2: Complex = {
+    data: [100, 3.00, 10],
+    output: function (all: boolean): number [] {
+        return this.data;
+    }
+};
+
+// union types
+let myRealRealAge: number | string = 27;
+// myRealRealAge = "26";
+
+// check types
+let finalValue = 30;
+if (typeof finalValue == "number") {
+    console.log("Final value is a number");
+}
+
+// never
+function neverReturns():never {
+    throw new Error('Oh no! An error!');
+}
+
+// non-nullable types
+let canBeNull: number | null = 12;
+canBeNull = null;
+let canAlsoBeNull;
+canAlsoBeNull = null;
+let canThisBeAny = null;
